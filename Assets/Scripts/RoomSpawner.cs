@@ -23,6 +23,24 @@ public class RoomSpawner : MonoBehaviour
     {
         Camera cam = Camera.main;
 
+        SpawnPickups(cam);
+        SpawnFurniture();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            SpawnFurniture();
+            SpawnPickups(Camera.main);
+        }
+    }
+
+    private void SpawnPickups(Camera cam)
+    {
+        GameObject[] pickupsToRemove = GameObject.FindGameObjectsWithTag("Pickup");
+        for (int i = 0; i < pickupsToRemove.Length; i++) { Destroy(pickupsToRemove[i]); }
+
         //spawn objects
         for (int i = 0; i < pickupsToSpawn; i++)
         {
@@ -31,14 +49,17 @@ public class RoomSpawner : MonoBehaviour
 
             Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
         }
-
-        SpawnFurniture();
     }
 
     private void SpawnFurniture()
     {
-        for (int i = 0; i < spawnedFurniture.Count; i++) { Destroy(spawnedFurniture[i]); }
+        //remove old furniture
+        GameObject[] furnitureToDestroy = GameObject.FindGameObjectsWithTag("Furniture");
+        for (int i = 0; i < furnitureToDestroy.Length; i++) { Destroy(furnitureToDestroy[i]); }
 
+        furnitureSpawnPoints.Clear();
+
+        //add all potential spawnpoints
         for (int i = 0; i < furnitureSpawnPointsObject.transform.childCount + 1; i++)
         {
             furnitureSpawnPoints.Add(furnitureSpawnPointsObject.GetComponentsInChildren<Transform>()[i].position);
@@ -50,9 +71,8 @@ public class RoomSpawner : MonoBehaviour
             int positionToSpawn = Random.Range(0, furnitureSpawnPoints.Count);
 
             //spawn the furniture at set point with a random rotation
-            Instantiate(furniture[Random.Range(0, furniture.Length)], furnitureSpawnPoints[positionToSpawn], 
+            Instantiate(furniture[Random.Range(0, furniture.Length)], furnitureSpawnPoints[positionToSpawn],
                 Quaternion.Euler(new(0, 0, Random.Range(0f, 360f))));
-            
 
             //remove that point from the list to not spawn twice at same location
             furnitureSpawnPoints.RemoveAt(positionToSpawn);
