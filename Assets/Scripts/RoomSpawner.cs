@@ -23,15 +23,7 @@ public class RoomSpawner : MonoBehaviour
     {
         Camera cam = Camera.main;
 
-        //spawn objects
-        for (int i = 0; i < pickupsToSpawn; i++)
-        {
-            //generate points for pickup
-            Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(50, cam.pixelWidth - 50), Random.Range(50, cam.pixelHeight - 50))) + offset;
-
-            Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
-        }
-
+        SpawnPickups(cam);
         SpawnFurniture();
     }
 
@@ -40,15 +32,34 @@ public class RoomSpawner : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SpawnFurniture();
+            SpawnPickups(Camera.main);
+        }
+    }
+
+    private void SpawnPickups(Camera cam)
+    {
+        GameObject[] pickupsToRemove = GameObject.FindGameObjectsWithTag("Pickup");
+        for (int i = 0; i < pickupsToRemove.Length; i++) { Destroy(pickupsToRemove[i]); }
+
+        //spawn objects
+        for (int i = 0; i < pickupsToSpawn; i++)
+        {
+            //generate points for pickup
+            Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(50, cam.pixelWidth - 50), Random.Range(50, cam.pixelHeight - 50))) + offset;
+
+            Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
         }
     }
 
     private void SpawnFurniture()
     {
-        //List<GameObject> furnitureToDestroy = new List<GameObject>().AddRange(GameObject.FindGameObjectsWithTag("Furniture"));
+        //remove old furniture
         GameObject[] furnitureToDestroy = GameObject.FindGameObjectsWithTag("Furniture");
         for (int i = 0; i < furnitureToDestroy.Length; i++) { Destroy(furnitureToDestroy[i]); }
 
+        furnitureSpawnPoints.Clear();
+
+        //add all potential spawnpoints
         for (int i = 0; i < furnitureSpawnPointsObject.transform.childCount + 1; i++)
         {
             furnitureSpawnPoints.Add(furnitureSpawnPointsObject.GetComponentsInChildren<Transform>()[i].position);
