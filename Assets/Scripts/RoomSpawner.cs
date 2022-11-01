@@ -6,7 +6,11 @@ public class RoomSpawner : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] GameObject pickup;
-    [SerializeField] GameObject furniture;
+    [SerializeField] GameObject[] furniture;
+
+    [Header("Furniture")]
+    [SerializeField] GameObject furnitureSpawnPointsObject;
+    [SerializeField] List<Vector2> furnitureSpawnPoints;
 
     [Header("Variables")]
     [SerializeField] int pickupsToSpawn;
@@ -18,15 +22,33 @@ public class RoomSpawner : MonoBehaviour
     {
         Camera cam = Camera.main;
 
+        //spawn objects
         for (int i = 0; i < pickupsToSpawn; i++)
         {
-            Instantiate(pickup, cam.ScreenToWorldPoint(new(Random.Range(0, cam.pixelWidth), Random.Range(0, cam.pixelHeight))) + offset
-                , Quaternion.identity);
+            //generate points for pickup
+            Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(50, cam.pixelWidth - 50), Random.Range(50, cam.pixelHeight - 50))) + offset;
+
+            Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
         }
+
+        SpawnFurniture();
+    }
+
+    private void SpawnFurniture()
+    {
+        for (int i = 0; i < furnitureSpawnPointsObject.transform.childCount + 1; i++)
+        {
+            furnitureSpawnPoints.Add(furnitureSpawnPointsObject.GetComponentsInChildren<Transform>()[i].position);
+        }
+
         for (int i = 0; i < furnitureToSpawn; i++)
         {
-            Instantiate(furniture, cam.ScreenToWorldPoint(new(Random.Range(0, cam.pixelWidth), Random.Range(0, cam.pixelHeight))) + offset
-               , Quaternion.identity);
+            //generate points for furnitures
+            //Vector2 furnitureSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(50, cam.pixelWidth - 50), Random.Range(50, cam.pixelHeight - 50))) + offset;
+            int positionToSpawn = Random.Range(0, furnitureSpawnPoints.Count);
+
+            Instantiate(furniture[Random.Range(0, furniture.Length)], furnitureSpawnPoints[positionToSpawn], Quaternion.Euler(new(0, 0, Random.Range(0f, 360f))));
+            furnitureSpawnPoints.RemoveAt(positionToSpawn);
         }
     }
 }
