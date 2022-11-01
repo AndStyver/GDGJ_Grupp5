@@ -36,6 +36,12 @@ public class RoomSpawner : MonoBehaviour
         }
     }
 
+    public void GenerateRoom()
+    {
+        SpawnPickups(Camera.main);
+        SpawnFurniture();
+    }
+
     private void SpawnPickups(Camera cam)
     {
         GameObject[] pickupsToRemove = GameObject.FindGameObjectsWithTag("Pickup");
