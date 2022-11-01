@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Clock : MonoBehaviour
 {
     const float hour = 60f;
-    const double second = 1f / 60f;
-    double timeStep = 0f;
+    const float second = 1f / hour;
+    //double timeStep = 0f;
 
     float currentTime;
     [SerializeField] Image targetImage;
@@ -16,14 +16,13 @@ public class Clock : MonoBehaviour
     {
         currentTime = 0f;
         targetImage.fillAmount = currentTime;
-        timeStep = 0f;
+
     }
 
     private void Update()
     {
-        currentTime += (1 / hour) * Time.deltaTime;
+        currentTime += second * Time.deltaTime;
 
         targetImage.fillAmount = currentTime;
-        timeStep = 0;
     }
 }
