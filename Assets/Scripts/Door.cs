@@ -22,6 +22,9 @@ public class Door : MonoBehaviour
 
     public void openDoor()
     {
+        if (isOpen)
+            return;
+
         doorAnimator.SetTrigger("Open");
         isOpen = true;
         if (openDoorSound != null)
@@ -32,6 +35,8 @@ public class Door : MonoBehaviour
 
     public void closeDoor()
     {
+        if (!isOpen)
+            return;
         doorAnimator.SetTrigger("Close");
         isOpen = false;
         if (closeDoorSound != null)
