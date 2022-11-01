@@ -35,9 +35,19 @@ public class RoomSpawner : MonoBehaviour
         SpawnFurniture();
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            SpawnFurniture();
+        }
+    }
+
     private void SpawnFurniture()
     {
-        for (int i = 0; i < spawnedFurniture.Count; i++) { Destroy(spawnedFurniture[i]); }
+        //List<GameObject> furnitureToDestroy = new List<GameObject>().AddRange(GameObject.FindGameObjectsWithTag("Furniture"));
+        GameObject[] furnitureToDestroy = GameObject.FindGameObjectsWithTag("Furniture");
+        for (int i = 0; i < furnitureToDestroy.Length; i++) { Destroy(furnitureToDestroy[i]); }
 
         for (int i = 0; i < furnitureSpawnPointsObject.transform.childCount + 1; i++)
         {
@@ -50,9 +60,8 @@ public class RoomSpawner : MonoBehaviour
             int positionToSpawn = Random.Range(0, furnitureSpawnPoints.Count);
 
             //spawn the furniture at set point with a random rotation
-            Instantiate(furniture[Random.Range(0, furniture.Length)], furnitureSpawnPoints[positionToSpawn], 
+            Instantiate(furniture[Random.Range(0, furniture.Length)], furnitureSpawnPoints[positionToSpawn],
                 Quaternion.Euler(new(0, 0, Random.Range(0f, 360f))));
-            
 
             //remove that point from the list to not spawn twice at same location
             furnitureSpawnPoints.RemoveAt(positionToSpawn);
