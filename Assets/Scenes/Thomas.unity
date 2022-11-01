@@ -366,7 +366,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814037211}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5c4d573fbdc7fc84ea10aa2840c07e55, type: 2}
   m_CullingMode: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openDoorSound: {fileID: 0}
   closeDoorSound: {fileID: 0}
-  hinge: {fileID: 0}
+  hinge: {fileID: 392493114}
 --- !u!1 &2055646853
 GameObject:
   m_ObjectHideFlags: 0

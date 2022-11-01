@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-
-    bool isOpen = true;
-
     public AudioSource openDoorSound;
     public AudioSource closeDoorSound;
     public GameObject hinge;
@@ -17,17 +14,28 @@ public class Door : MonoBehaviour
     void Start()
     {
         doorAnimator = gameObject.GetComponent<Animator>();
+        
+        //closeDoor();
+        //openDoor();
     }
 
     void openDoor()
     {
-        isOpen = true;
-        doorAnimator.SetBool("isOpen", isOpen);
+        doorAnimator.SetTrigger("Open");
+
+        if (openDoorSound != null)
+        {
+            openDoorSound.Play();
+        }
     }
 
     void closeDoor()
     {
-        isOpen = false;
-        doorAnimator.SetBool("isOpen", isOpen);
+        doorAnimator.SetTrigger("Close");
+
+        if (closeDoorSound != null)
+        {
+            closeDoorSound.Play();
+        }
     }
 }
