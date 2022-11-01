@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     public AudioSource openDoorSound;
     public AudioSource closeDoorSound;
     public GameObject hinge;
+    public bool isOpen = true;
 
     Animator doorAnimator;
 
@@ -19,20 +20,20 @@ public class Door : MonoBehaviour
         //openDoor();
     }
 
-    void openDoor()
+    public void openDoor()
     {
         doorAnimator.SetTrigger("Open");
-
+        isOpen = true;
         if (openDoorSound != null)
         {
             openDoorSound.Play();
         }
     }
 
-    void closeDoor()
+    public void closeDoor()
     {
         doorAnimator.SetTrigger("Close");
-
+        isOpen = false;
         if (closeDoorSound != null)
         {
             closeDoorSound.Play();
