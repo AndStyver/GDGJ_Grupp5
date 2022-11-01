@@ -26,7 +26,7 @@ public class Door : MonoBehaviour
         isOpen = true;
         if (openDoorSound != null)
         {
-            openDoorSound.Play();
+            openDoorSound.Play(0);
         }
     }
 
@@ -36,7 +36,7 @@ public class Door : MonoBehaviour
         isOpen = false;
         if (closeDoorSound != null)
         {
-            closeDoorSound.Play();
+            closeDoorSound.Play(0);
         }
     }
 }
