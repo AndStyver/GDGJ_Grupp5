@@ -73,7 +73,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorNumber: 0
   roomSpawner: {fileID: 0}
-  doorController: {fileID: 0}
 --- !u!1 &2108688040806326342
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +681,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008387566, y: -0.2616667}
+  m_Offset: {x: 0.011007905, y: -0.41835454}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -693,5 +692,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2668, y: 0.55666655}
+  m_Size: {x: 2.228009, y: 0.24329084}
   m_EdgeRadius: 0
