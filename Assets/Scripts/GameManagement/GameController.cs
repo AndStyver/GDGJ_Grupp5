@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            gameOver.EndGame();
+            gameOver.EndGame(true);
         }
     }
 }
