@@ -22,6 +22,19 @@ public class DoorController : MonoBehaviour
         }
 
         Debug.Log(doors);
+        StartCoroutine(closeDoorTimer(2f));
+    }
+
+    void Update()
+    {
+        
+    }
+
+    IEnumerator closeDoorTimer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        CloseRandomDoor();
+        StartCoroutine(closeDoorTimer(2f));
     }
 
     public void CloseRandomDoor()
@@ -59,11 +72,5 @@ public class DoorController : MonoBehaviour
     void CloseDoor(int position)
     {
         doors[position].GetComponent<Door>().closeDoor();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
