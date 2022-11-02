@@ -24,7 +24,7 @@ public class DoorController : MonoBehaviour
         }
 
         Debug.Log(doors);
-        StartCoroutine(closeDoorTimer(2f));
+        StartCoroutine(CloseRandomEverySeconds(2f));
     }
 
     void Update()
@@ -32,7 +32,16 @@ public class DoorController : MonoBehaviour
         
     }
 
-    IEnumerator closeDoorTimer(float time)
+    IEnumerator CloseDoorAfterSeconds(float time, int position)
+    {
+        int currentRoom = roomCounter;
+        CloseDoor(position);
+        yield return new WaitForSeconds(1);
+        if (currentRoom == roomCounter)
+            StartCoroutine(CloseRandomEverySeconds(time));
+    }
+
+    IEnumerator CloseRandomEverySeconds(float time)
     {
         int currentRoom = roomCounter;
         while (currentRoom == roomCounter)
@@ -79,14 +88,14 @@ public class DoorController : MonoBehaviour
         doorIsOpen[position] = false;
     }
 
-    public void ResetDoors()
+    public void ResetDoors(int lastEnteredDoor)
     {
         roomCounter++;
         for (int i = 0; i < doors.Length; i++)
         {
             OpenDoor(i);
         }
-        StartCoroutine(closeDoorTimer(2f));
+        StartCoroutine(CloseDoorAfterSeconds(2f, lastEnteredDoor));
     }
 
     void OpenDoor(int position)
