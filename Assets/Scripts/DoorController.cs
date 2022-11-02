@@ -8,6 +8,8 @@ public class DoorController : MonoBehaviour
     bool[] doorIsOpen;
     bool aDoorIsOpen = true;
 
+    private int roomCounter = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +34,13 @@ public class DoorController : MonoBehaviour
 
     IEnumerator closeDoorTimer(float time)
     {
-        yield return new WaitForSeconds(time);
-        CloseRandomDoor();
-        StartCoroutine(closeDoorTimer(2f));
+        int currentRoom = roomCounter;
+        while (currentRoom == roomCounter)
+        {
+            yield return new WaitForSeconds(time);
+            if(currentRoom == roomCounter)
+                CloseRandomDoor();
+        }
     }
 
     public void CloseRandomDoor()
@@ -56,12 +62,10 @@ public class DoorController : MonoBehaviour
         }
 
         int randInt = Random.Range(0, 4);
-        GameObject door = doors[randInt];
 
         if (doorIsOpen[randInt])
         {
             CloseDoor(randInt);
-            doorIsOpen[randInt] = false;
         }
         else
         {
@@ -72,5 +76,23 @@ public class DoorController : MonoBehaviour
     void CloseDoor(int position)
     {
         doors[position].GetComponent<Door>().closeDoor();
+        doorIsOpen[position] = false;
+    }
+
+    public void ResetDoors()
+    {
+        roomCounter++;
+        for (int i = 0; i < doors.Length; i++)
+        {
+            OpenDoor(i);
+        }
+        StartCoroutine(closeDoorTimer(2f));
+    }
+
+    void OpenDoor(int position)
+    {
+        aDoorIsOpen = true;
+        doors[position].GetComponent<Door>().openDoor();
+        doorIsOpen[position] = true;
     }
 }
