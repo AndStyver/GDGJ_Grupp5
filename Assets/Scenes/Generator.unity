@@ -930,6 +930,7 @@ MonoBehaviour:
   - {fileID: 7687075215584606972, guid: 75e13e1664329ba4a887ae72b9a098ff, type: 3}
   - {fileID: 5208707511226844429, guid: 9358f059f51520f42bd5b871eb4a445f, type: 3}
   - {fileID: 7589132658278225773, guid: 0ad23b0cd152133479ff4c521d251155, type: 3}
+  - {fileID: 7420289100990999133, guid: 244e0b79520b0fc4e9b7fbd87fff64bb, type: 3}
   furnitureSpawnPointsObject: {fileID: 1691683446}
   furnitureSpawnPoints: []
   spawnedFurniture: []
