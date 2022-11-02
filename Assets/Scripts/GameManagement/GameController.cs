@@ -14,12 +14,9 @@ public class GameController : MonoBehaviour
 
     GameOverController gameOver;
 
-    PickupController pickups;
-
     private void Start()
     {
         gameOver = GetComponent<GameOverController>();
-        pickups = GetComponent<PickupController>();
 
         roomsLeft = maxRooms;
 
@@ -35,7 +32,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            gameOver.EndGame(pickups.score);
+            gameOver.EndGame();
         }
     }
 }
