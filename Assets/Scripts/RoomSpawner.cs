@@ -17,6 +17,7 @@ public class RoomSpawner : MonoBehaviour
     [SerializeField] int pickupsToSpawn;
     [SerializeField] int furnitureToSpawn;
     Vector3 offset = new(0, 0, 10);
+    [SerializeField] float spawnOffsetFromWall;
 
     PickupController pickupController;
 
@@ -56,7 +57,8 @@ public class RoomSpawner : MonoBehaviour
         for (int i = 0; i < pickupsToSpawn; i++)
         {
             //generate points for pickup
-            Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(50, cam.pixelWidth - 50), Random.Range(50, cam.pixelHeight - 50))) + offset;
+            Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(spawnOffsetFromWall, cam.pixelWidth - spawnOffsetFromWall), 
+                Random.Range(spawnOffsetFromWall, cam.pixelHeight - spawnOffsetFromWall))) + offset;
 
             Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
         }
