@@ -95,10 +95,10 @@ public class DoorController : MonoBehaviour
 
     public void ResetDoors(int lastEnteredDoor)
     {
-        doors[lastEnteredDoor].GetComponent<Door>().SkipGhostAnimation();
         roomCounter++;
         for (int i = 0; i < doors.Length; i++)
         {
+            doors[i].GetComponent<Door>().SkipGhostAnimation();
             OpenDoor(i);
         }
         CloseFirstDoor(lastEnteredDoor);
