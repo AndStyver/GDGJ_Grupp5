@@ -26,7 +26,7 @@ public class RoomSpawner : MonoBehaviour
     void Start()
     {
         pickupController = GameObject.Find("PickupController").GetComponent<PickupController>();
-        gameController = GetComponent<GameController>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         Camera cam = Camera.main;
 
