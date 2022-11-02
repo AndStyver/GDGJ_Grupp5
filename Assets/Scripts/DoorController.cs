@@ -7,6 +7,7 @@ public class DoorController : MonoBehaviour
     GameObject[] doors;
     bool[] doorIsOpen;
     bool aDoorIsOpen = true;
+    [SerializeField][Range(0.5f, 3)] float closeDoorTimer = 2f;
 
     private int roomCounter = 0;
 
@@ -23,16 +24,25 @@ public class DoorController : MonoBehaviour
             doorIsOpen[i] = doors[i].GetComponent<Door>().isOpen;
         }
 
-        Debug.Log(doors);
-        StartCoroutine(closeDoorTimer(2f));
+        StartCoroutine(CloseRandomEverySeconds(closeDoorTimer));
     }
 
-    void Update()
+    void CloseFirstDoor(int position)
     {
-        
+        CloseDoor(position);
+        StartCoroutine(CloseRandomEverySeconds(closeDoorTimer));
     }
 
-    IEnumerator closeDoorTimer(float time)
+    IEnumerator CloseDoorAfterSeconds(float time, int position)
+    {
+        int currentRoom = roomCounter;
+        CloseDoor(position);
+        yield return new WaitForSeconds(1);
+        if (currentRoom == roomCounter)
+            StartCoroutine(CloseRandomEverySeconds(time));
+    }
+
+    IEnumerator CloseRandomEverySeconds(float time)
     {
         int currentRoom = roomCounter;
         while (currentRoom == roomCounter)
@@ -79,14 +89,15 @@ public class DoorController : MonoBehaviour
         doorIsOpen[position] = false;
     }
 
-    public void ResetDoors()
+    public void ResetDoors(int lastEnteredDoor)
     {
         roomCounter++;
         for (int i = 0; i < doors.Length; i++)
         {
             OpenDoor(i);
         }
-        StartCoroutine(closeDoorTimer(2f));
+        CloseFirstDoor(lastEnteredDoor);
+        //StartCoroutine(CloseDoorAfterSeconds(2f, lastEnteredDoor));
     }
 
     void OpenDoor(int position)

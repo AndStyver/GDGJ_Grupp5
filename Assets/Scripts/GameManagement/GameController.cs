@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1;
         roomsLeft = maxRooms;
 
         roomsLeftText.text = "Rooms Left: " + roomsLeft;
@@ -35,7 +34,6 @@ public class GameController : MonoBehaviour
 
     private void EndGame()
     {
-        Time.timeScale = 0;
         endPanel.SetActive(true);
     }
 }
