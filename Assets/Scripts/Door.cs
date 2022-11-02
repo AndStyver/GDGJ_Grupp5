@@ -18,7 +18,8 @@ public class Door : MonoBehaviour
 
     public void SkipGhostAnimation()
     {
-        doorAnimator.SetTrigger("SkipGhost");
+        if(doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorGhost"))
+            doorAnimator.SetTrigger("SkipGhost");
     }
 
     public void openDoor()
