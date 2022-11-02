@@ -21,6 +21,7 @@ public class PickupController : MonoBehaviour
 
         pickupsLeft = totalPickups.Count;
 
+        score = 0;
         ResetCombo();
     }
 
@@ -29,7 +30,7 @@ public class PickupController : MonoBehaviour
         score += Mathf.RoundToInt(scoreToAdd * combo);
 
         combo++;
-        Debug.Log("Score is: " + score + " and Combo is: " + combo);
+        //Debug.Log("Score is: " + score + " and Combo is: " + combo);
 
         scoreText.text = "Score: " + score;
         comboText.text = "Combo: " + combo;
@@ -44,11 +45,5 @@ public class PickupController : MonoBehaviour
     public void PickupPickedUp()
     {
         score++;
-
-        //pickupsLeft--;
-        //if (pickupsLeft <= 0)
-        //{
-        //}
-        //Debug.Log("Picked up item! Pickups left = " + pickupsLeft);
     }
 }
