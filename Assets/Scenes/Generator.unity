@@ -971,7 +971,7 @@ MonoBehaviour:
   spawnedFurniture: []
   pickupsToSpawn: 5
   furnitureToSpawn: 5
-  spawnOffsetFromWall: 300
+  spawnOffsetFromWall: 150
 --- !u!1 &979959161
 GameObject:
   m_ObjectHideFlags: 0
