@@ -15,7 +15,7 @@ public class Pickup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            pickupController.AddScore(1.5f);
+           // pickupController.AddScore(1.5f);
             Destroy(this.gameObject);
         }
     }
