@@ -11,12 +11,12 @@ public class Clock : MonoBehaviour
 
     float currentTime;
     [SerializeField] Image targetImage;
+    [SerializeField] Image handleImage;
 
     private void Start()
     {
         currentTime = 0f;
         targetImage.fillAmount = currentTime;
-
     }
 
     private void Update()
@@ -24,5 +24,9 @@ public class Clock : MonoBehaviour
         currentTime += second * Time.deltaTime;
 
         targetImage.fillAmount = currentTime;
+
+        Vector3 handleRotation = handleImage.transform.eulerAngles;
+        handleRotation.z = -currentTime * 360;
+        handleImage.transform.eulerAngles = handleRotation;
     }
 }
