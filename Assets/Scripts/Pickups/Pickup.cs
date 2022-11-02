@@ -11,7 +11,7 @@ public class Pickup : MonoBehaviour
 
     private void Start()
     {
-        pickupController = GameObject.Find("PickupController").GetComponent<PickupController>();
+        pickupController = GameObject.Find("GameController").GetComponent<PickupController>();
 
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         int spritePicker = Random.Range(0,candySprites.Length);

@@ -12,8 +12,15 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject endPanel;
     [SerializeField] TextMeshProUGUI roomsLeftText;
 
+    GameOverController gameOver;
+
+    PickupController pickups;
+
     private void Start()
     {
+        gameOver = GetComponent<GameOverController>();
+        pickups = GetComponent<PickupController>();
+
         roomsLeft = maxRooms;
 
         roomsLeftText.text = "Rooms Left: " + roomsLeft;
@@ -28,12 +35,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            EndGame();
+            gameOver.EndGame(pickups.score);
         }
-    }
-
-    private void EndGame()
-    {
-        endPanel.SetActive(true);
     }
 }

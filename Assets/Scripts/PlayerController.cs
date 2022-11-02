@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //Find our Rigidbody2D
-        rb2d = GetComponent<Rigidbody2D>();
+        //Find our Rigidbody2D 
+        rb2d = GetComponent<Rigidbody2D>(); 
 
         playerAnimator = gameObject.GetComponent<Animator>();
 

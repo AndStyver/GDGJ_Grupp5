@@ -25,7 +25,7 @@ public class RoomSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pickupController = GameObject.Find("PickupController").GetComponent<PickupController>();
+        pickupController = GameObject.Find("GameController").GetComponent<PickupController>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         Camera cam = Camera.main;
