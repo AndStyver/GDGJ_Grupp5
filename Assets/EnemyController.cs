@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     
 
     public Transform player;
-    int MoveSpeed = 8;
+    int MoveSpeed = 7;
     int MaxDist = 10000;
     float MinDist = 1f;
 
@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
         if (Vector3.Distance(enemyRb2d.transform.position, player.position) >= MinDist)
         {
 
-            enemyRb2d.transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+            enemyRb2d.transform.position += enemyRb2d.transform.forward * MoveSpeed * Time.deltaTime;
 
             if (Vector3.Distance(transform.position, player.position) <= MaxDist)
             {
