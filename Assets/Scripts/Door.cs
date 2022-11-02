@@ -7,7 +7,6 @@ public class Door : MonoBehaviour
 {
     public AudioSource openDoorSound;
     public AudioSource closeDoorSound;
-    public GameObject hinge;
     public bool isOpen = true;
 
     Animator doorAnimator;
