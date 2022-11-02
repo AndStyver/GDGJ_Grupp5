@@ -32,9 +32,11 @@ public class PlayerController : MonoBehaviour
         float verInput = Input.GetAxisRaw("Vertical");
 
         bool rightAnim = horInput > 0;
-        playerAnimator.SetBool("Right", rightAnim);
         bool leftAnim = horInput < 0;
+        bool upAnim = verInput > 0;
+        playerAnimator.SetBool("Right", rightAnim);
         playerAnimator.SetBool("Left", leftAnim);
+        playerAnimator.SetBool("Up", upAnim);
 
         movement.x = horInput;
         movement.y = verInput;
