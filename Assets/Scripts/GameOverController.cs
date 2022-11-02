@@ -10,11 +10,17 @@ public class GameOverController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI finalScoreText;
 
+    [SerializeField] PickupController pickups;
 
-    public void EndGame(int score)
+    private void Start()
+    {
+        pickups.GetComponent<PickupController>();
+    }
+
+    public void EndGame()
     {
         endPanel.SetActive(true);
-        finalScoreText.text = "Final Score: " + score;
+        finalScoreText.text = "Final Score: " + pickups.score;
     }
 
     public void ButtonRestart()
