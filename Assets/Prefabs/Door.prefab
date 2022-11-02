@@ -29,11 +29,10 @@ Transform:
   m_GameObject: {fileID: 3489847192361697000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3489847193102895281}
-  - {fileID: 3489847194127172616}
   - {fileID: 3489847192787391445}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openDoorSound: {fileID: 3489847192361697004}
   closeDoorSound: {fileID: 3489847192361696979}
-  hinge: {fileID: 3489847194127172617}
   isOpen: 1
 --- !u!95 &3489847192361697006
 Animator:
@@ -461,34 +459,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2668, y: 0.55666655}
   m_EdgeRadius: 0
---- !u!1 &3489847194127172617
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3489847194127172616}
-  m_Layer: 0
-  m_Name: Hinge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3489847194127172616
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3489847194127172617}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.04, y: -0.53, z: -0.07122966}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3489847192361697007}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
