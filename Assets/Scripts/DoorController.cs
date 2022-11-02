@@ -60,7 +60,7 @@ public class DoorController : MonoBehaviour
             Debug.Log("No Open Door was found");
 
             GameOverController gameOver = GameObject.Find("GameController").GetComponent<GameOverController>();
-            gameOver.EndGame();
+            gameOver.EndGame(false);
 
             return;
         }
