@@ -34,9 +34,11 @@ public class PlayerController : MonoBehaviour
         bool rightAnim = horInput > 0;
         bool leftAnim = horInput < 0;
         bool upAnim = verInput > 0;
+        bool downAnim = verInput < 0;
         playerAnimator.SetBool("Right", rightAnim);
         playerAnimator.SetBool("Left", leftAnim);
         playerAnimator.SetBool("Up", upAnim);
+        playerAnimator.SetBool("Down", downAnim);
 
         movement.x = horInput;
         movement.y = verInput;
