@@ -8,7 +8,7 @@ public class PickupController : MonoBehaviour
     [SerializeField] List<GameObject> totalPickups;
     int pickupsLeft;
 
-    [SerializeField] int score;
+    public int score;
     [SerializeField] int combo;
 
     [SerializeField] TextMeshProUGUI scoreText;

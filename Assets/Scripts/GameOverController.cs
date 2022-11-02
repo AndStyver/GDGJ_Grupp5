@@ -11,10 +11,10 @@ public class GameOverController : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreText;
 
 
-    public void EndGame()
+    public void EndGame(int score)
     {
         endPanel.SetActive(true);
-
+        finalScoreText.text = "Final Score: " + score;
     }
 
     public void ButtonRestart()
