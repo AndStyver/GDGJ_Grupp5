@@ -20,11 +20,13 @@ public class RoomSpawner : MonoBehaviour
     [SerializeField] float spawnOffsetFromWall;
 
     PickupController pickupController;
+    GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
         pickupController = GameObject.Find("PickupController").GetComponent<PickupController>();
+        gameController = GetComponent<GameController>();
 
         Camera cam = Camera.main;
 
@@ -46,6 +48,8 @@ public class RoomSpawner : MonoBehaviour
         SpawnFurniture();
 
         pickupController.ResetCombo();
+
+        gameController.NewRoom();
     }
 
     private void SpawnPickups(Camera cam)
