@@ -7,16 +7,16 @@ public class EnemyController : MonoBehaviour
     //Enemy Reference 
     Rigidbody2D enemyRb2d;
 
-    //Distance between enemy and player
-    float distance;
+  
 
-    //Current movement
-    Vector2 movement = new Vector2();
+  
 
-    //Player Movement speed
-    float speed = 10;
+    
 
-    public PlayerController playerController;
+    public Transform player;
+    int MoveSpeed = 5;
+    int MaxDist = 10000;
+    float MinDist = 0.1f;
 
 
     void Start()
@@ -28,7 +28,18 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        distance = Vector3.Distance(playerController.transform.position, enemyRb2d.transform.position);
-        Debug.Log("");
+        transform.LookAt(player);
+        if (Vector3.Distance(enemyRb2d.transform.position, player.position) >= MinDist)
+        {
+
+            enemyRb2d.transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+
+            if (Vector3.Distance(transform.position, player.position) <= MaxDist)
+            {
+                
+            }
+
+
+        }
     }
 }
