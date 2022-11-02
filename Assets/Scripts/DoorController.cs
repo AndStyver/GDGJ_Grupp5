@@ -7,7 +7,7 @@ public class DoorController : MonoBehaviour
     GameObject[] doors;
     bool[] doorIsOpen;
     bool aDoorIsOpen = true;
-    [SerializeField][Range(0.5f, 3)] float closeDoorTimer = 2f;
+    [SerializeField] [Range(0.5f, 3)] float closeDoorTimer = 2f;
 
     private int roomCounter = 0;
 
@@ -48,7 +48,7 @@ public class DoorController : MonoBehaviour
         while (currentRoom == roomCounter)
         {
             yield return new WaitForSeconds(time);
-            if(currentRoom == roomCounter)
+            if (currentRoom == roomCounter)
                 CloseRandomDoor();
         }
     }
@@ -58,9 +58,13 @@ public class DoorController : MonoBehaviour
         if (!aDoorIsOpen)
         {
             Debug.Log("No Open Door was found");
+
+            GameOverController gameOver = GameObject.Find("GameController").GetComponent<GameOverController>();
+            gameOver.EndGame(false);
+
             return;
         }
-        
+
         aDoorIsOpen = false;
 
         foreach (bool open in doorIsOpen)
@@ -94,6 +98,7 @@ public class DoorController : MonoBehaviour
         roomCounter++;
         for (int i = 0; i < doors.Length; i++)
         {
+            doors[i].GetComponent<Door>().SkipGhostAnimation();
             OpenDoor(i);
         }
         CloseFirstDoor(lastEnteredDoor);

@@ -16,6 +16,12 @@ public class Door : MonoBehaviour
         doorAnimator = gameObject.GetComponent<Animator>();
     }
 
+    public void SkipGhostAnimation()
+    {
+        if(doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorGhost"))
+            doorAnimator.SetTrigger("SkipGhost");
+    }
+
     public void openDoor()
     {
         if (isOpen)
@@ -37,7 +43,7 @@ public class Door : MonoBehaviour
         isOpen = false;
         if (closeDoorSound != null)
         {
-            closeDoorSound.Play(0);
+            closeDoorSound.Play(44100);
         }
     }
 }
