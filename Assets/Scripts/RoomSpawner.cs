@@ -18,9 +18,13 @@ public class RoomSpawner : MonoBehaviour
     [SerializeField] int furnitureToSpawn;
     Vector3 offset = new(0, 0, 10);
 
+    PickupController pickupController;
+
     // Start is called before the first frame update
     void Start()
     {
+        pickupController = GameObject.Find("PickupController").GetComponent<PickupController>();
+
         Camera cam = Camera.main;
 
         SpawnPickups(cam);
@@ -31,8 +35,7 @@ public class RoomSpawner : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SpawnFurniture();
-            SpawnPickups(Camera.main);
+            GenerateRoom();
         }
     }
 
@@ -40,6 +43,8 @@ public class RoomSpawner : MonoBehaviour
     {
         SpawnPickups(Camera.main);
         SpawnFurniture();
+
+        pickupController.ResetCombo();
     }
 
     private void SpawnPickups(Camera cam)

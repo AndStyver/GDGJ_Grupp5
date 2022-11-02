@@ -13,10 +13,14 @@ public class PlayerController : MonoBehaviour
     //Player Movement speed
     float speed = 10;
 
+    Animator playerAnimator;
+
     void Start()
     {
         //Find our Rigidbody2D
         rb2d = GetComponent<Rigidbody2D>();
+
+        playerAnimator = gameObject.GetComponent<Animator>();
 
         
     }
@@ -26,6 +30,11 @@ public class PlayerController : MonoBehaviour
         //get input from player
         float horInput = Input.GetAxisRaw("Horizontal");
         float verInput = Input.GetAxisRaw("Vertical");
+
+        bool rightAnim = horInput > 0;
+        playerAnimator.SetBool("Right", rightAnim);
+        bool leftAnim = horInput < 0;
+        playerAnimator.SetBool("Left", leftAnim);
 
         movement.x = horInput;
         movement.y = verInput;
