@@ -972,6 +972,7 @@ MonoBehaviour:
   pickupsToSpawn: 5
   furnitureToSpawn: 5
   spawnOffsetFromWall: 150
+  spawnOffsetFromWallY: 50
 --- !u!1 &979959161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,6 +1991,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8a2361fc11fd9f0439800734658d5265, type: 3}
+    - target: {fileID: 5328124175515034167, guid: 9f3e75cccdc36124f8ff41f7c73fefd5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 7129896195081472105, guid: 9f3e75cccdc36124f8ff41f7c73fefd5, type: 3}
       propertyPath: m_Name
       value: Player
