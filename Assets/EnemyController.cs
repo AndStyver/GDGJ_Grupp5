@@ -9,13 +9,9 @@ public class EnemyController : MonoBehaviour
 
   
 
-  
-
-    
-
     public Transform player;
     int MoveSpeed = 7;
-    int MaxDist = 10000;
+    int MaxDist = 10;
     float MinDist = 1f;
 
 
