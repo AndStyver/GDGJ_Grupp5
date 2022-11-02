@@ -2925,6 +2925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e82f7bdaf7b7d49811b6fef3ef8e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  closeDoorTimer: 1
 --- !u!4 &1963013471
 Transform:
   m_ObjectHideFlags: 0
