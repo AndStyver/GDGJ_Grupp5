@@ -14,9 +14,6 @@ public class Door : MonoBehaviour
     void Start()
     {
         doorAnimator = gameObject.GetComponent<Animator>();
-        
-        //closeDoor();
-        //openDoor();
     }
 
     public void openDoor()
