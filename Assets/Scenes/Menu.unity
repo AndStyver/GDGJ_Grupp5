@@ -1320,9 +1320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Alvin
-
-    Sandra'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52632fa80011723429aad9b627a1745b, type: 2}
   m_sharedMaterial: {fileID: -3689412106184602850, guid: 52632fa80011723429aad9b627a1745b, type: 2}
@@ -4787,7 +4785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1287556730
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6023,7 +6021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1593468978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6631,9 +6629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '132
-
-    51'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52632fa80011723429aad9b627a1745b, type: 2}
   m_sharedMaterial: {fileID: -3689412106184602850, guid: 52632fa80011723429aad9b627a1745b, type: 2}
