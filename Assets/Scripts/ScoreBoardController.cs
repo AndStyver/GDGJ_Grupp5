@@ -32,12 +32,6 @@ public class ScoreBoardController : MonoBehaviour
             Debug.Log("Insufficient Score, no score added");
             return;
         }
-        if (score.playerName == "")
-        {
-            Debug.Log("No name, no score added");
-            return;
-        }
-
 
         if (scoreboard.ContainsKey(score.score))
             scoreboard[score.score] += ", " + score.playerName;
