@@ -12,24 +12,18 @@ public class ScoreBoardController : MonoBehaviour
     TextMeshProUGUI names;
     TextMeshProUGUI scores;
 
-    void Start()
-    {
-        Debug.Log("Scoreboard start");
-        UpdateScore();
-        //scoreboard = new SortedDictionary<int, string>();
-    }
-
-    void Update()
-    {
-        
-    }
-
     public void AddNewScore(ScoreHolder score)
     {
         score.score  = -score.score; //invert for sorting
         if (score.score == 0)
         {
             Debug.Log("Insufficient Score, no score added");
+            return;
+        }
+
+        if (score.playerName == "")
+        {
+            Debug.Log("No name, no score added");
             return;
         }
 
@@ -75,7 +69,6 @@ public class ScoreBoardController : MonoBehaviour
 
         if (instance == null)
         {
-            Debug.Log("Awake instance is null");
             scoreboard = new SortedDictionary<int, string>();
             names = GameObject.Find("Names").GetComponent<TextMeshProUGUI>();
             scores = GameObject.Find("Scores").GetComponent<TextMeshProUGUI>();
@@ -84,8 +77,6 @@ public class ScoreBoardController : MonoBehaviour
         }
         else
         {
-
-            Debug.Log("Awake instance null");
             Destroy(gameObject);
         }
     }
