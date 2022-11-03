@@ -54,6 +54,10 @@ public class Door : MonoBehaviour
         {
             closeDoorSound.PlayDelayed(1);
         }
+    }
+
+    public void EnableDoorCollider()
+    {
         doorCollider.isTrigger = false;
     }
 }
