@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
         {
             roomsLeft--;
             roomsLeftText.text = "Rooms Left: " + roomsLeft;
-            paintings.ShowNewPaintings();
+            //paintings.ShowNewPaintings();
         }
         else
         {
