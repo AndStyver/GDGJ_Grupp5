@@ -34,15 +34,24 @@ public class GameOverController : MonoBehaviour
 
     public void ButtonRestart()
     {
-        string playerName = "Placeholder";
-        ScoreBoardController.Instance.AddNewScore(new ScoreHolder(playerName, pickups.score));
+        UpdateScore();
         SceneManager.LoadScene(1);
         Debug.Log("Game Restarted");
     }
 
     public void ButtonBackToMenu()
     {
+        UpdateScore();
+
         SceneManager.LoadScene(0);
         Debug.Log("Returned to menu");
+    }
+
+    void UpdateScore()
+    {
+        string playerName = "Placeholder";
+        ScoreHolder newScore = new ScoreHolder(playerName, pickups.score);
+        ScoreBoardController.instance.AddNewScore(newScore);
+        ScoreBoardController.instance.UpdateScore();
     }
 }

@@ -8,9 +8,15 @@ public class MenuScript : MonoBehaviour
     [SerializeField] GameObject tutorialPanel;
     [SerializeField] GameObject creditsPanel;
     [SerializeField] GameObject storyPanel;
+    [SerializeField] GameObject scorePanel;
 
+    private void Start()
+    {
+        ScoreBoardController.instance.setActive(true);
+    }
     public void ButtonStart()
     {
+        ScoreBoardController.instance.setActive(false);
         SceneManager.LoadScene(1);
         Debug.Log("Game Started");
     }
