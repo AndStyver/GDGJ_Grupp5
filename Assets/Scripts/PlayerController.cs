@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
         playerAnimator = gameObject.GetComponent<Animator>();
 
+        StartCoroutine(Blink(2f));
         
     }
 
@@ -53,6 +54,15 @@ public class PlayerController : MonoBehaviour
         //{
 
         //}
+    }
+
+    IEnumerator Blink(float time)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(time);
+            playerAnimator.SetTrigger("Blink");
+        }
     }
 
 }
