@@ -235,6 +235,7 @@ MonoBehaviour:
   - {x: -8.5, y: 8.5, z: 0}
   - {x: 8.5, y: 8.5, z: 0}
   - {x: 8.5, y: -8.5, z: 0}
+  playerName: 
 --- !u!1001 &1147285461
 PrefabInstance:
   m_ObjectHideFlags: 0
