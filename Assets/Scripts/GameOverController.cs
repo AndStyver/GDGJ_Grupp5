@@ -16,11 +16,16 @@ public class GameOverController : MonoBehaviour
     [SerializeField] Sprite[] gameOverImages;
     [SerializeField] Image gameOverImage;
 
+    public EnemyController enemyController;
+    public Vector3[] enemySpawnPos;
+    
+
     private void Start()
     {
         pickups.GetComponent<PickupController>();
-
         Time.timeScale = 1;
+
+        SpawnGhosts();
     }
 
     public void EndGame(bool win)
@@ -31,6 +36,16 @@ public class GameOverController : MonoBehaviour
         if (win) { gameOverImage.sprite = gameOverImages[0]; }
         else { gameOverImage.sprite = gameOverImages[1]; }
     }
+      
+     public void SpawnGhosts()
+    {
+        Transform player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        for (var i = 0; i < enemySpawnPos.Length; i++)
+        {
+            Instantiate(enemyController.gameObject, player.position + enemySpawnPos[i], Quaternion.identity);
+        }
+    }
+
 
     public void ButtonRestart()
     {
@@ -43,4 +58,5 @@ public class GameOverController : MonoBehaviour
         SceneManager.LoadScene(0);
         Debug.Log("Returned to menu");
     }
+
 }
