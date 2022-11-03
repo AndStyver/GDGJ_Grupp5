@@ -19,7 +19,7 @@ public class GameOverController : MonoBehaviour
     public EnemyController enemyController;
     public Vector3[] enemySpawnPos;
 
-    private string playerName;
+    public string playerName;
 
 
     private void Start()
