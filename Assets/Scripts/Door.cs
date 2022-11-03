@@ -60,4 +60,8 @@ public class Door : MonoBehaviour
     {
         doorCollider.isTrigger = false;
     }
+    public void DisableDoorCollider()
+    {
+        doorCollider.isTrigger = true;
+    }
 }
