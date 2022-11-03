@@ -60,6 +60,11 @@ public class ScoreBoardController : MonoBehaviour
         }
     }
 
+    public bool setActive()
+    {
+        return transform.GetChild(0).gameObject.activeSelf;
+    }
+
     public void setActive(bool set)
     {
         transform.GetChild(0).gameObject.SetActive(set);
