@@ -60,7 +60,7 @@ public class DoorController : MonoBehaviour
             Debug.Log("No Open Door was found");
             roomCounter++; //Cheap fix to break CloseRandomEverySeconds
             GameOverController gameOver = GameObject.Find("GameController").GetComponent<GameOverController>();
-            gameOver.EndGame(false);
+            gameOver.SpawnGhosts();
 
             return;
         }

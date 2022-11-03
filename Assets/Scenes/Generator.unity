@@ -3493,6 +3493,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a70b4745db5d2b047a8a3a3c281826dd, type: 3}
   - {fileID: 21300000, guid: d53ceac9bec3229468b397587dc54681, type: 3}
   gameOverImage: {fileID: 1283159720}
+  enemyController: {fileID: 220357786140018169, guid: 1615534891ab9c3429101e0ea3f68088, type: 3}
+  enemySpawnPos:
+  - {x: 0, y: 12, z: 0}
+  - {x: 0, y: -12, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: -8.5, y: -8.5, z: 0}
+  - {x: -8.5, y: 8.5, z: 0}
+  - {x: 8.5, y: 8.5, z: 0}
+  - {x: 8.5, y: -8.5, z: 0}
 --- !u!114 &1068049870
 MonoBehaviour:
   m_ObjectHideFlags: 0

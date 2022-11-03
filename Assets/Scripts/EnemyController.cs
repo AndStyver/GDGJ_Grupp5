@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
 
     Transform player;
     SpriteRenderer enemyFlip;
-    float MoveSpeed = 20f; //Move speed of ghosts
+    [SerializeField] float MoveSpeed = 20f; //Move speed of ghosts
     int MaxDist = 10; //Max distance that ghost can aggro onto player
     float MinDist = 0.1f; //Min distance that ghost will get to player 
 
@@ -21,13 +21,13 @@ public class EnemyController : MonoBehaviour
         //Find our Rigidbody2D
         enemyRb2d = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        gameOverController = GameObject.FindWithTag("MainCamera").GetComponent<GameOverController>();
+        gameOverController = GameObject.Find("GameController").GetComponent<GameOverController>();
         enemyFlip = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
-       
+
         if (Vector3.Distance(enemyRb2d.transform.position, player.position) >= MinDist)
         {
             Vector3 direction = (player.position - enemyRb2d.transform.position).normalized;
@@ -41,8 +41,6 @@ public class EnemyController : MonoBehaviour
             {
                 enemyFlip.flipX = false;
             }
-
-
         }
     }
 
@@ -50,7 +48,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameOverController.EndGame(true);
+            gameOverController.EndGame(false);
         }
     }
 
