@@ -8,9 +8,16 @@ public class MenuScript : MonoBehaviour
     [SerializeField] GameObject tutorialPanel;
     [SerializeField] GameObject creditsPanel;
     [SerializeField] GameObject storyPanel;
+    [SerializeField] GameObject scorePanel;
+
+    private void Start()
+    {
+        ScoreBoardController.instance.setActive(true);
+    }
 
     public void ButtonStart()
     {
+        ScoreBoardController.instance.setActive(false);
         SceneManager.LoadScene(1);
         Debug.Log("Game Started");
     }
@@ -20,6 +27,7 @@ public class MenuScript : MonoBehaviour
         creditsPanel.SetActive(false);
         storyPanel.SetActive(false);
         tutorialPanel.SetActive(!tutorialPanel.activeSelf);
+        ScoreBoardController.instance.setActive(!tutorialPanel.activeSelf);
     }
 
     public void ButtonCredits()
@@ -27,6 +35,7 @@ public class MenuScript : MonoBehaviour
         tutorialPanel.SetActive(false);
         storyPanel.SetActive(false);
         creditsPanel.SetActive(!creditsPanel.activeSelf);
+        ScoreBoardController.instance.setActive(!creditsPanel.activeSelf);
     }
 
     public void ButtonStory()
@@ -34,6 +43,7 @@ public class MenuScript : MonoBehaviour
         creditsPanel.SetActive(false);
         tutorialPanel.SetActive(false);
         storyPanel.SetActive(!storyPanel.activeSelf);
+        ScoreBoardController.instance.setActive(!storyPanel.activeSelf);
     }
 
     public void ButtonQuit()

@@ -18,14 +18,14 @@ public class GameOverController : MonoBehaviour
 
     public EnemyController enemyController;
     public Vector3[] enemySpawnPos;
-    
+
+    public string playerName;
+
 
     private void Start()
     {
         pickups.GetComponent<PickupController>();
         Time.timeScale = 1;
-
-        SpawnGhosts();
     }
 
     public void EndGame(bool win)
@@ -49,16 +49,30 @@ public class GameOverController : MonoBehaviour
 
     public void ButtonRestart()
     {
-        string playerName = "Placeholder";
-        ScoreBoardController.Instance.AddNewScore(new ScoreHolder(playerName, pickups.score));
+        UpdateScore();
         SceneManager.LoadScene(1);
         Debug.Log("Game Restarted");
     }
 
     public void ButtonBackToMenu()
     {
+        UpdateScore();
+
         SceneManager.LoadScene(0);
         Debug.Log("Returned to menu");
     }
 
+    void UpdateScore()
+    {
+        
+        ScoreHolder newScore = new ScoreHolder(playerName, pickups.score);
+        ScoreBoardController.instance.AddNewScore(newScore);
+        ScoreBoardController.instance.UpdateScore();
+    }
+
+    public void ReadStringInput(string input)
+    {
+        playerName = input;
+        Debug.Log(playerName);
+    }
 }
