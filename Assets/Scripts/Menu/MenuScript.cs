@@ -15,17 +15,6 @@ public class MenuScript : MonoBehaviour
         ScoreBoardController.instance.setActive(true);
     }
 
-    private void Update()
-    {
-        if (tutorialPanel.activeSelf == false &&
-            creditsPanel.activeSelf == false &&
-            storyPanel.activeSelf == false)
-        {
-            ScoreBoardController.instance.setActive(true);
-        }
-        else { ScoreBoardController.instance.setActive(false); }
-    }
-
     public void ButtonStart()
     {
         ScoreBoardController.instance.setActive(false);
@@ -38,6 +27,7 @@ public class MenuScript : MonoBehaviour
         creditsPanel.SetActive(false);
         storyPanel.SetActive(false);
         tutorialPanel.SetActive(!tutorialPanel.activeSelf);
+        ScoreBoardController.instance.setActive(!tutorialPanel.activeSelf);
     }
 
     public void ButtonCredits()
@@ -45,6 +35,7 @@ public class MenuScript : MonoBehaviour
         tutorialPanel.SetActive(false);
         storyPanel.SetActive(false);
         creditsPanel.SetActive(!creditsPanel.activeSelf);
+        ScoreBoardController.instance.setActive(!creditsPanel.activeSelf);
     }
 
     public void ButtonStory()
@@ -52,6 +43,7 @@ public class MenuScript : MonoBehaviour
         creditsPanel.SetActive(false);
         tutorialPanel.SetActive(false);
         storyPanel.SetActive(!storyPanel.activeSelf);
+        ScoreBoardController.instance.setActive(!storyPanel.activeSelf);
     }
 
     public void ButtonQuit()
