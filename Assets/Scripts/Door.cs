@@ -11,15 +11,22 @@ public class Door : MonoBehaviour
 
     Animator doorAnimator;
 
+    Collider2D doorCollider;
+
     void Start()
     {
         doorAnimator = gameObject.GetComponent<Animator>();
+        doorCollider = GetComponentInChildren<Collider2D>();
+        Debug.Log(doorCollider.name);
+
+        if (isOpen) { doorCollider.isTrigger = true; }
     }
 
     public void SkipGhostAnimation()
     {
-        if(doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorGhost"))
+        if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorGhost"))
             doorAnimator.SetTrigger("SkipGhost");
+        closeDoorSound.Stop();
     }
 
     public void openDoor()
@@ -33,17 +40,20 @@ public class Door : MonoBehaviour
         {
             openDoorSound.Play(0);
         }
+        doorCollider.isTrigger = true;
     }
 
     public void closeDoor()
     {
         if (!isOpen)
             return;
+
         doorAnimator.SetTrigger("Close");
         isOpen = false;
         if (closeDoorSound != null)
         {
             closeDoorSound.PlayDelayed(1);
         }
+        doorCollider.isTrigger = false;
     }
 }
