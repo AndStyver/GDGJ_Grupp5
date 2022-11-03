@@ -40,10 +40,10 @@ public class RoomSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            GenerateRoom();
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    GenerateRoom();
+        //}
     }
 
     public void GenerateRoom()
