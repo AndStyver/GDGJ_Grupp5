@@ -14,6 +14,18 @@ public class MenuScript : MonoBehaviour
     {
         ScoreBoardController.instance.setActive(true);
     }
+
+    private void Update()
+    {
+        if (tutorialPanel.activeSelf == false &&
+            creditsPanel.activeSelf == false &&
+            storyPanel.activeSelf == false)
+        {
+            ScoreBoardController.instance.setActive(true);
+        }
+        else { ScoreBoardController.instance.setActive(false); }
+    }
+
     public void ButtonStart()
     {
         ScoreBoardController.instance.setActive(false);
