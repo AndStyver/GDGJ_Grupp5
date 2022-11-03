@@ -14,7 +14,7 @@ public class Pickup : MonoBehaviour
         pickupController = GameObject.Find("GameController").GetComponent<PickupController>();
 
         spriteRend = GetComponentInChildren<SpriteRenderer>();
-        int spritePicker = Random.Range(0,candySprites.Length);
+        int spritePicker = Random.Range(0, candySprites.Length);
         spriteRend.sprite = candySprites[spritePicker];
     }
 
@@ -22,7 +22,10 @@ public class Pickup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            pickupController.AddScore(1.5f);
+            if (pickupController == null) { Start(); }
+            else
+                pickupController.AddScore(1.5f);
+
             Destroy(this.gameObject);
         }
     }
