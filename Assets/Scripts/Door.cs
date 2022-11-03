@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
         isOpen = false;
         if (closeDoorSound != null)
         {
-            closeDoorSound.Play(44100);
+            closeDoorSound.PlayDelayed(1);
         }
     }
 }
