@@ -6,7 +6,10 @@ public class RoomSpawner : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] GameObject pickup;
-    [SerializeField] GameObject[] furniture;
+    //the array of all possible furniture to spawn, more than one meaning it can spawn twice in the same room
+    [SerializeField] GameObject[] furniture; 
+    //the list that the game chooses from, dont add stuff in it!
+    [SerializeField] List<GameObject> furnitureToPickFrom;
 
     [Header("Furniture")]
     [SerializeField] GameObject furnitureSpawnPointsObject;
@@ -62,7 +65,7 @@ public class RoomSpawner : MonoBehaviour
         for (int i = 0; i < pickupsToSpawn; i++)
         {
             //generate points for pickup
-            Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(spawnOffsetFromWall, cam.pixelWidth - spawnOffsetFromWall), 
+            Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(spawnOffsetFromWall, cam.pixelWidth - spawnOffsetFromWall),
                 Random.Range(spawnOffsetFromWallY, cam.pixelHeight - spawnOffsetFromWallY))) + offset;
 
             Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
@@ -76,6 +79,7 @@ public class RoomSpawner : MonoBehaviour
         for (int i = 0; i < furnitureToDestroy.Length; i++) { Destroy(furnitureToDestroy[i]); }
 
         furnitureSpawnPoints.Clear();
+        furnitureToPickFrom.Clear();
 
         //add all potential spawnpoints
         for (int i = 0; i < furnitureSpawnPointsObject.transform.childCount + 1; i++)
@@ -83,17 +87,24 @@ public class RoomSpawner : MonoBehaviour
             furnitureSpawnPoints.Add(furnitureSpawnPointsObject.GetComponentsInChildren<Transform>()[i].position);
         }
 
+        for (int i = 0; i < furniture.Length; i++)
+        {
+            furnitureToPickFrom.Add(furniture[i]);
+        }
+
         for (int i = 0; i < furnitureToSpawn; i++)
         {
             //pick a point for the furniture to spawn on
             int positionToSpawn = Random.Range(0, furnitureSpawnPoints.Count);
+            int furnitureToSpawn = Random.Range(0, furnitureToPickFrom.Count);
 
             //spawn the furniture at set point with a random rotation
-            Instantiate(furniture[Random.Range(0, furniture.Length)], furnitureSpawnPoints[positionToSpawn],
+            Instantiate(furnitureToPickFrom[furnitureToSpawn], furnitureSpawnPoints[positionToSpawn],
                 Quaternion.Euler(new(0, 0, Random.Range(0f, 360f))));
 
             //remove that point from the list to not spawn twice at same location
             furnitureSpawnPoints.RemoveAt(positionToSpawn);
+            furnitureToPickFrom.RemoveAt(furnitureToSpawn);
         }
     }
 }
