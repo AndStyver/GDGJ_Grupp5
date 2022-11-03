@@ -49,6 +49,8 @@ public class GameOverController : MonoBehaviour
 
     public void ButtonRestart()
     {
+        string playerName = "Placeholder";
+        ScoreBoardController.Instance.AddNewScore(new ScoreHolder(playerName, pickups.score));
         SceneManager.LoadScene(1);
         Debug.Log("Game Restarted");
     }
