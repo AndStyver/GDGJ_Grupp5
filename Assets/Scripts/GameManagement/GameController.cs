@@ -13,10 +13,12 @@ public class GameController : MonoBehaviour
     [SerializeField] TextMeshProUGUI roomsLeftText;
 
     GameOverController gameOver;
+    ShowPaintingsScript paintings;
 
     private void Start()
     {
         gameOver = GetComponent<GameOverController>();
+        paintings = GetComponent<ShowPaintingsScript>();
 
         roomsLeft = maxRooms;
 
@@ -29,6 +31,7 @@ public class GameController : MonoBehaviour
         {
             roomsLeft--;
             roomsLeftText.text = "Rooms Left: " + roomsLeft;
+            paintings.ShowNewPaintings();
         }
         else
         {
