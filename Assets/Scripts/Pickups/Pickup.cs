@@ -8,6 +8,7 @@ public class Pickup : MonoBehaviour
 
     [SerializeField] Sprite[] candySprites;
     SpriteRenderer spriteRend;
+    public AudioSource pickupSound;
 
     private void Start()
     {
@@ -26,7 +27,14 @@ public class Pickup : MonoBehaviour
             else
                 pickupController.AddScore(1.5f);
 
-            Destroy(this.gameObject);
+            if (pickupSound != null)
+            {
+                pickupSound.pitch = pickupSound.pitch + Random.Range(-0.2f, 0.2f);
+                pickupSound.Play();
+            }
+
+            gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            Destroy(this.gameObject, 1);
         }
     }
 }
