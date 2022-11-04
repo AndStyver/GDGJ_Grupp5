@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class ScoreBoardController : MonoBehaviour
 {
@@ -66,7 +65,6 @@ public class ScoreBoardController : MonoBehaviour
 
     void Awake()
     {
-
         if (instance == null)
         {
             scoreboard = new SortedDictionary<int, string>();
