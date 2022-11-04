@@ -34,6 +34,7 @@ public class Pickup : MonoBehaviour
             }
 
             gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
             Destroy(this.gameObject, 1);
         }
     }
