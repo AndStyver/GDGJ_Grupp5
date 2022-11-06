@@ -63,8 +63,10 @@ public class ScoreBoardController : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(set);
     }
 
+    //Awake is called every time the Menu Scene is loaded 
     void Awake()
     {
+        //If we don't have a Scoreboard, make one
         if (instance == null)
         {
             scoreboard = new SortedDictionary<int, string>();
