@@ -40,15 +40,16 @@ public class RoomSpawner : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    GenerateRoom();
-        //}
+        if (Input.GetMouseButtonDown(1))
+        {
+            GenerateRoom();
+        }
     }
 
     public void GenerateRoom()
     {
-        SpawnPickups(Camera.main);
+        //SpawnPickups(Camera.main);
+        NewSpawnPickups();
         SpawnFurniture();
 
         pickupController.ResetCombo();
@@ -67,6 +68,26 @@ public class RoomSpawner : MonoBehaviour
             //generate points for pickup
             Vector2 pickupSpawnVector = cam.ScreenToWorldPoint(new(Random.Range(spawnOffsetFromWall, cam.pixelWidth - spawnOffsetFromWall),
                 Random.Range(spawnOffsetFromWallY, cam.pixelHeight - spawnOffsetFromWallY))) + offset;
+
+            Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
+        }
+    }
+
+    private void NewSpawnPickups()
+    {
+        GameObject[] pickupsToRemove = GameObject.FindGameObjectsWithTag("Pickup");
+        for (int i = 0; i < pickupsToRemove.Length; i++) { Destroy(pickupsToRemove[i]); }
+
+        for (int i = 0; i < pickupsToSpawn; i++)
+        {
+            //generate points for pickup
+            GameObject spawnArea = GameObject.Find("PickupSpawnArea");
+            Vector3 roomSize = spawnArea.transform.localScale;
+            //Debug.Log(roomSize);
+
+            Vector2 pickupSpawnVector = transform.position + 
+                new Vector3(Random.Range(-roomSize.x / 2, roomSize.x / 2), Random.Range(-roomSize.y / 2, roomSize.y / 2));
+
 
             Instantiate(pickup, pickupSpawnVector, Quaternion.identity);
         }
