@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Vector2 movement = new Vector2();
 
     //Player Movement speed
-    float speed = 10;
+    [SerializeField][Range(1, 10)]float speed = 10;
 
     Animator playerAnimator;
 

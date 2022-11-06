@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7338385534065673910}
   - component: {fileID: 8203563060500062919}
   - component: {fileID: 9035031198866613293}
+  - component: {fileID: 4095689814406454721}
   m_Layer: 0
   m_Name: Tea Table
   m_TagString: Furniture
@@ -111,3 +112,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.73, y: 1.1}
   m_EdgeRadius: 0.12
+--- !u!50 &4095689814406454721
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420289100990999133}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 1
+  m_LinearDrag: 70
+  m_AngularDrag: 70
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

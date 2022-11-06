@@ -32,10 +32,11 @@ public class Pickup : MonoBehaviour
                 pickupSound.pitch = pickupSound.pitch + Random.Range(-0.2f, 0.2f);
                 pickupSound.Play();
             }
-
+            //Disable render and collider after pickup to allow sound to play
             gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
             gameObject.GetComponentInChildren<CircleCollider2D>().enabled = false;
-            Destroy(this.gameObject, 1);
+            //Destroy the parent gameobject
+            Destroy(gameObject.transform.parent.gameObject, 1);
         }
     }
 }
