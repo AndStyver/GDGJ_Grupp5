@@ -7,7 +7,7 @@ public class DoorController : MonoBehaviour
     GameObject[] doors;
     bool[] doorIsOpen;
     bool aDoorIsOpen = true;
-    [SerializeField] [Range(0.5f, 3)] float closeDoorTimer = 2f;
+    [SerializeField] [Range(0.5f, 10)] float closeDoorTimer = 2f;
 
     private int roomCounter = 0;
 
