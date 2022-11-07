@@ -20,9 +20,12 @@ public class GameController : MonoBehaviour
         gameOver = GetComponent<GameOverController>();
         paintings = GetComponent<ShowPaintingsScript>();
 
-        roomsLeft = maxRooms;
+        //Enable UICanvas if we forgot
+        GameObject.Find("UICanvas").SetActive(true);
 
-        roomsLeftText.text = "Rooms Left: " + roomsLeft;
+        roomsLeft = maxRooms;
+        if (roomsLeftText != null)
+            roomsLeftText.text = "Rooms Left: " + roomsLeft;
     }
 
     public void NewRoom()
@@ -30,7 +33,8 @@ public class GameController : MonoBehaviour
         if (roomsLeft > 0)
         {
             roomsLeft--;
-            roomsLeftText.text = "Rooms Left: " + roomsLeft;
+            if (roomsLeftText != null)
+                roomsLeftText.text = "Rooms Left: " + roomsLeft;
             //paintings.ShowNewPaintings();
         }
         else

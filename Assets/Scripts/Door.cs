@@ -26,6 +26,8 @@ public class Door : MonoBehaviour
     {
         if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorGhost"))
             doorAnimator.SetTrigger("SkipGhost");
+        if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Open"))
+            doorAnimator.SetTrigger("ForceClose");
         closeDoorSound.Stop();
     }
 
@@ -55,6 +57,7 @@ public class Door : MonoBehaviour
             closeDoorSound.PlayDelayed(1);
         }
     }
+
 
     public void EnableDoorCollider()
     {

@@ -10,6 +10,7 @@ public class DoorController : MonoBehaviour
     [SerializeField] [Range(0.5f, 10)] float closeDoorTimer = 2f;
 
     private int roomCounter = 0;
+    private bool isActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class DoorController : MonoBehaviour
             doorIsOpen[i] = doors[i].GetComponent<Door>().isOpen;
         }
 
-        StartCoroutine(CloseRandomEverySeconds(closeDoorTimer));
+        //StartCoroutine(CloseRandomEverySeconds(closeDoorTimer));
     }
 
     void CloseFirstDoor(int position)
@@ -38,7 +39,7 @@ public class DoorController : MonoBehaviour
         int currentRoom = roomCounter;
         CloseDoor(position);
         yield return new WaitForSeconds(1);
-        if (currentRoom == roomCounter)
+        if (currentRoom == roomCounter && isActive)
             StartCoroutine(CloseRandomEverySeconds(time));
     }
 
@@ -48,7 +49,7 @@ public class DoorController : MonoBehaviour
         while (currentRoom == roomCounter)
         {
             yield return new WaitForSeconds(time);
-            if (currentRoom == roomCounter)
+            if (currentRoom == roomCounter && isActive)
                 CloseRandomDoor();
         }
     }
@@ -87,10 +88,16 @@ public class DoorController : MonoBehaviour
         }
     }
 
-    void CloseDoor(int position)
+    public void CloseDoor(int position)
     {
         doors[position].GetComponent<Door>().closeDoor();
         doorIsOpen[position] = false;
+    }
+
+    public void ForceCloseDoor(int position)
+    {
+        CloseDoor(position);
+        doors[position].GetComponent<Door>().SkipGhostAnimation();
     }
 
     public void ResetDoors(int lastEnteredDoor)
@@ -111,4 +118,16 @@ public class DoorController : MonoBehaviour
         doors[position].GetComponent<Door>().openDoor();
         doorIsOpen[position] = true;
     }
+
+    public void Activate()
+    {
+        isActive = true;
+        StartCoroutine(CloseRandomEverySeconds(closeDoorTimer));
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
+    }
+
 }

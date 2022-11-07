@@ -8,12 +8,23 @@ public class DoorPlayerMover : MonoBehaviour
     public int doorNumber;
 
     public RoomSpawner roomSpawner;
+    RoomController roomController;
     DoorController doorController;
 
     void Start()
     {
         doorController = GameObject.Find("DoorController").GetComponent<DoorController>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+        if (roomController == null)
+        {
+            roomController = GetComponentInParent<RoomController>();
+        }
+
+        if (roomSpawner == null)
+        {
+            roomSpawner = GetComponentInParent<RoomSpawner>();
+        }
     }
 
     void Update()
@@ -25,32 +36,38 @@ public class DoorPlayerMover : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
+            Vector3 playerPos = player.transform.position;
+            float offset = 5;
             switch (doorNumber)
             {
-                case 0:
-                    player.transform.position = new Vector3(0.02f, -3.11f, 0);
-                    roomSpawner.GenerateRoom();
-                    doorController.ResetDoors(2);
+                case 0: //Top door
+                    
+                    player.transform.position = new (playerPos.x, playerPos.y + (roomController.roomSize.y/ (offset - 1)), playerPos.z);
+                    roomController.MoveToNewRoom(doorNumber);
+                    //roomSpawner.GenerateRoom();
+                    //doorController.ResetDoors(2);
 
                     break;
 
-                case 1:
-                    player.transform.position = new Vector3(-5.14f, -0.11f, 0);
-                    roomSpawner.GenerateRoom();
-                    doorController.ResetDoors(3);
+                case 1: //Right door
+                    player.transform.position = new(playerPos.x + (roomController.roomSize.x / offset), playerPos.y, playerPos.z);
+                    roomController.MoveToNewRoom(doorNumber);
+                    //roomSpawner.GenerateRoom();
+                    //doorController.ResetDoors(3);
                     break;
 
-                case 2:
-                    player.transform.position = new Vector3(-0.01f, 3.49f, 0);
-                    roomSpawner.GenerateRoom();
-                    doorController.ResetDoors(0);
+                case 2: //Down door
+                    player.transform.position = new(playerPos.x, playerPos.y + (-roomController.roomSize.y / (offset - 1)), playerPos.z);
+                    roomController.MoveToNewRoom(doorNumber);
+                    //roomSpawner.GenerateRoom();
+                    //doorController.ResetDoors(0);
                     break;
 
-                case 3:
-                    player.transform.position = new Vector3(5.46f, 0.14f, 0);
-                    roomSpawner.GenerateRoom();
-                    doorController.ResetDoors(1);
+                case 3: //Left door
+                    player.transform.position = new(playerPos.x + (-roomController.roomSize.x / offset), playerPos.y, playerPos.z);
+                    roomController.MoveToNewRoom(doorNumber);
+                    //roomSpawner.GenerateRoom();
+                    //doorController.ResetDoors(1);
                     break;
             }
         }

@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     Vector3 currentRoom;
     Vector3 nextRoom;
 
-    [SerializeField] [Range(0.1f, 4)] float transitionTime = 1f;
+    public float transitionTime = 1f;
 
     bool moveToNext = false;
     private float timer = 0;
@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextRoom = new Vector3(17.1800003f, 0, transform.position.z);
+        //nextRoom = new Vector3(17.1800003f, 0, transform.position.z);
     }
 
     void Update()
@@ -41,15 +41,15 @@ public class CameraController : MonoBehaviour
         {
             //transform.position = endPosition;
             moveToNext = false;
-            nextRoom = startPosition;
+            currentRoom = endPosition;
             timer = 0;
             lerp = 0;
         }
     }
 
-    public void moveToNextRoom()
+    public void moveToNextRoom(Vector3 position)
     {
         moveToNext = true;
-        currentRoom = transform.position;
+        nextRoom = position;
     }
 }

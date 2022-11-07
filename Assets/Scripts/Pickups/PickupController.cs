@@ -31,15 +31,17 @@ public class PickupController : MonoBehaviour
 
         combo++;
         //Debug.Log("Score is: " + score + " and Combo is: " + combo);
-
-        scoreText.text = "Score: " + score;
-        comboText.text = "Combo: " + combo;
+        if(scoreText != null)
+            scoreText.text = "Score: " + score;
+        if (comboText != null)
+            comboText.text = "Combo: " + combo;
     }
 
     public void ResetCombo()
     {
         combo = 1;
-        comboText.text = "Combo: " + combo;
+        if (comboText != null)
+            comboText.text = "Combo: " + combo;
     }
 
     public void PickupPickedUp()
