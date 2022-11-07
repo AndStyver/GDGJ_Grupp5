@@ -162,8 +162,9 @@ public class RoomSpawner : MonoBehaviour
     private void ChangeRoomGraphics()
     {
         SpriteRenderer newRoom = rooms[Random.Range(0, rooms.Length)].GetComponent<SpriteRenderer>();
-        newRoom.flipX = (0 ==Random.Range(0, 2));
         GetComponent<SpriteRenderer>().sprite = newRoom.sprite;
+        //Randomly flip image
+        GetComponent<SpriteRenderer>().flipX = (0 == Random.Range(0, 2));
 
     }
 }
