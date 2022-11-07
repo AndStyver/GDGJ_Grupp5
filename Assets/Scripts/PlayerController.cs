@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(1, 10)]float speed = 10;
 
     Animator playerAnimator;
+    public bool allowInputs = true;
 
     void Start()
     {
@@ -28,24 +29,27 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //get input from player
-        float horInput = Input.GetAxisRaw("Horizontal");
-        float verInput = Input.GetAxisRaw("Vertical");
+        if (allowInputs)
+        {
+            //get input from player
+            float horInput = Input.GetAxisRaw("Horizontal");
+            float verInput = Input.GetAxisRaw("Vertical");
 
-        bool rightAnim = horInput > 0;
-        bool leftAnim = horInput < 0;
-        bool upAnim = verInput > 0;
-        bool downAnim = verInput < 0;
-        playerAnimator.SetBool("Right", rightAnim);
-        playerAnimator.SetBool("Left", leftAnim);
-        playerAnimator.SetBool("Up", upAnim);
-        playerAnimator.SetBool("Down", downAnim);
+            bool rightAnim = horInput > 0;
+            bool leftAnim = horInput < 0;
+            bool upAnim = verInput > 0;
+            bool downAnim = verInput < 0;
+            playerAnimator.SetBool("Right", rightAnim);
+            playerAnimator.SetBool("Left", leftAnim);
+            playerAnimator.SetBool("Up", upAnim);
+            playerAnimator.SetBool("Down", downAnim);
 
-        movement.x = horInput;
-        movement.y = verInput;
+            movement.x = horInput;
+            movement.y = verInput;
 
-        //Update our movement 
-        rb2d.velocity = movement.normalized * speed;
+            //Update our movement 
+            rb2d.velocity = movement.normalized * speed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -6,6 +6,11 @@ public class DoorPlayerMover : MonoBehaviour
 {
     GameObject player;
     public int doorNumber;
+    float timer = 0f;
+    Vector3 startPosition;
+    Vector3 endPosition;
+    bool moveBetweenRooms = false;
+    int newDoorNumber = -1;
 
     public RoomSpawner roomSpawner;
     RoomController roomController;
@@ -29,7 +34,10 @@ public class DoorPlayerMover : MonoBehaviour
 
     void Update()
     {
-
+        if (moveBetweenRooms)
+        {
+            TransitionBetweenRoom(startPosition, endPosition);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -41,35 +49,72 @@ public class DoorPlayerMover : MonoBehaviour
             switch (doorNumber)
             {
                 case 0: //Top door
-                    
-                    player.transform.position = new (playerPos.x, playerPos.y + (roomController.roomSize.y/offset) + 1, playerPos.z);
+                    newDoorNumber = 2;
+                    startPosition = playerPos;
+                    endPosition = new(playerPos.x, playerPos.y + (roomController.roomSize.y / offset) + 1, playerPos.z);
+                    //player.transform.position = new (playerPos.x, playerPos.y + (roomController.roomSize.y/offset) + 1, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
-                    //roomSpawner.GenerateRoom();
-                    //doorController.ResetDoors(2);
-
+                    TriggerTransitionBetweenRoom();
                     break;
 
                 case 1: //Right door
-                    player.transform.position = new(playerPos.x + (roomController.roomSize.x / offset) + 1, playerPos.y, playerPos.z);
+                    newDoorNumber = 3;
+                    startPosition = playerPos;
+                    endPosition = new(playerPos.x + (roomController.roomSize.x / offset) + 1, playerPos.y, playerPos.z);
+                    //player.transform.position = new(playerPos.x + (roomController.roomSize.x / offset) + 1, playerPos.y, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
-                    //roomSpawner.GenerateRoom();
-                    //doorController.ResetDoors(3);
+                    TriggerTransitionBetweenRoom();
                     break;
 
                 case 2: //Down door
-                    player.transform.position = new(playerPos.x, playerPos.y + (-roomController.roomSize.y / offset) - 1, playerPos.z);
+                    newDoorNumber = 0;
+                    startPosition = playerPos;
+                    endPosition = new(playerPos.x, playerPos.y + (-roomController.roomSize.y / offset) - 1, playerPos.z);
+                    //player.transform.position = new(playerPos.x, playerPos.y + (-roomController.roomSize.y / offset) - 1, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
-                    //roomSpawner.GenerateRoom();
-                    //doorController.ResetDoors(0);
+                    TriggerTransitionBetweenRoom();
                     break;
 
                 case 3: //Left door
-                    player.transform.position = new(playerPos.x + (-roomController.roomSize.x / offset) - 1, playerPos.y, playerPos.z);
+                    newDoorNumber = 1;
+                    startPosition = playerPos;
+                    endPosition = new(playerPos.x + (-roomController.roomSize.x / offset) - 1, playerPos.y, playerPos.z);
+                    //player.transform.position = new(playerPos.x + (-roomController.roomSize.x / offset) - 1, playerPos.y, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
-                    //roomSpawner.GenerateRoom();
-                    //doorController.ResetDoors(1);
+                    TriggerTransitionBetweenRoom();
                     break;
             }
+        }
+    }
+
+    void TriggerTransitionBetweenRoom()
+    {
+        startPosition = player.transform.position;
+        player.GetComponent<CircleCollider2D>().enabled = false;
+        player.GetComponent<PlayerController>().allowInputs = false;
+        foreach (SpriteRenderer sr in player.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sr.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        }
+        moveBetweenRooms = true;
+    }
+
+    void TransitionBetweenRoom(Vector3 startPosition, Vector3 endPosition)
+    {
+        player.transform.position = Vector3.Lerp(startPosition, endPosition, timer);
+        timer += Time.deltaTime;
+
+        if(timer > 1)
+        {
+            moveBetweenRooms = false;
+            player.GetComponent<CircleCollider2D>().enabled = true;
+            player.GetComponent<PlayerController>().allowInputs = true;
+            foreach (SpriteRenderer sr in player.GetComponentsInChildren<SpriteRenderer>())
+            {
+                sr.maskInteraction = SpriteMaskInteraction.None;
+            }
+            if(doorController != null)
+                doorController.ForceCloseDoor(newDoorNumber);
         }
     }
 

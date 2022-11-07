@@ -108,10 +108,16 @@ public class RoomController : MonoBehaviour
         Vector3 newCameraPos = rooms[newDoorNumber].transform.position;
         newCameraPos.z = -10;
         cameraController.moveToNextRoom(newCameraPos);
-        //Close door behind you
-        newRoom.GetComponentInChildren<DoorController>().ForceCloseDoor(newDoorNumber);
+        //Close door behind you after camera moves
+        StartCoroutine(CloseDoorBehindYou(newRoom, newDoorNumber, cameraController.transitionTime));
         //Activate new room
         ActivateRoom(rooms[newDoorNumber]);
+    }
+
+    IEnumerator CloseDoorBehindYou(GameObject newRoom,int doorNumber , float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        newRoom.GetComponentInChildren<DoorController>().ForceCloseDoor(doorNumber);
     }
 
     void AddRoom(Vector2 position, int doorNumber)
@@ -125,6 +131,7 @@ public class RoomController : MonoBehaviour
     {
         if(rooms[doorNumber] != null)
         {
+            rooms[doorNumber].GetComponentInChildren<DoorController>().Deactivate();
             Destroy(rooms[doorNumber], 1 + cameraController.transitionTime);
             Debug.Log("Deleted room at door number " + doorNumber);
         }
