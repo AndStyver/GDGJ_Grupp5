@@ -24,10 +24,8 @@ public class Door : MonoBehaviour
 
     public void SkipGhostAnimation()
     {
-        if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorGhost"))
+        if (!doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Close"))
             doorAnimator.SetTrigger("SkipGhost");
-        if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Open"))
-            doorAnimator.SetTrigger("ForceClose");
         closeDoorSound.Stop();
     }
 

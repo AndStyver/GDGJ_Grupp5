@@ -9,9 +9,13 @@ public class RoomController : MonoBehaviour
     GameObject[] rooms = new GameObject[4];
     Vector2[] roomPositions;
     CameraController cameraController;
+    GameObject startRoom;
+
+    private int prevRoomNumber = -1;
 
     void Start()
     {
+        startRoom = transform.GetChild(0).gameObject;
         cameraController = Camera.main.GetComponent<CameraController>();
         roomSize = room.GetComponent<SpriteRenderer>().size;
         // Top, Right, Down, Left
@@ -26,16 +30,16 @@ public class RoomController : MonoBehaviour
 
     public void StartRooms()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             AddRoom((Vector2)transform.position + roomPositions[i], i);
         }
-        AddRoom(transform.position, 3);
     }
 
     public void MoveToNewRoom(int doorNumber)
     {
         Debug.Log("MoveToNewRoom: entered door " + doorNumber);
+        
         int newDoorNumber = -1;
         switch (doorNumber)
         {
@@ -58,12 +62,29 @@ public class RoomController : MonoBehaviour
 
         int numOfRooms = 4;
 
+        //Clear pickups from previous room
+        if(prevRoomNumber != -1)
+        {
+            rooms[prevRoomNumber].GetComponent<RoomSpawner>().ClearPickups();
+            Debug.Log("Cleared pickups in " + prevRoomNumber);
+        }
+
+        prevRoomNumber = newDoorNumber;
+        
         //Remove old rooms
         for (int i = 0; i < numOfRooms; i++)
         {
             if(i != doorNumber)
                 RemoveRoom(i);
         }
+        //Remove starting room
+        if(startRoom != null)
+        {
+            Destroy(startRoom, 1 + cameraController.transitionTime);
+            startRoom.GetComponent<RoomSpawner>().ClearPickups();
+            Debug.Log("Deleted starting room");
+        }
+
         //Save new room
         GameObject newRoom = rooms[doorNumber];
         //Clear old rooms
@@ -88,7 +109,6 @@ public class RoomController : MonoBehaviour
         newCameraPos.z = -10;
         cameraController.moveToNextRoom(newCameraPos);
         //Close door behind you
-        newRoom.GetComponentInChildren<DoorController>().CloseDoor(newDoorNumber);
         newRoom.GetComponentInChildren<DoorController>().ForceCloseDoor(newDoorNumber);
         //Activate new room
         ActivateRoom(rooms[newDoorNumber]);

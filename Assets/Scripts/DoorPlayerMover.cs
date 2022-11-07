@@ -37,12 +37,12 @@ public class DoorPlayerMover : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Vector3 playerPos = player.transform.position;
-            float offset = 5;
+            float offset = 4;
             switch (doorNumber)
             {
                 case 0: //Top door
                     
-                    player.transform.position = new (playerPos.x, playerPos.y + (roomController.roomSize.y/ (offset - 1)), playerPos.z);
+                    player.transform.position = new (playerPos.x, playerPos.y + (roomController.roomSize.y/offset) + 1, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
                     //roomSpawner.GenerateRoom();
                     //doorController.ResetDoors(2);
@@ -50,21 +50,21 @@ public class DoorPlayerMover : MonoBehaviour
                     break;
 
                 case 1: //Right door
-                    player.transform.position = new(playerPos.x + (roomController.roomSize.x / offset), playerPos.y, playerPos.z);
+                    player.transform.position = new(playerPos.x + (roomController.roomSize.x / offset) + 1, playerPos.y, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
                     //roomSpawner.GenerateRoom();
                     //doorController.ResetDoors(3);
                     break;
 
                 case 2: //Down door
-                    player.transform.position = new(playerPos.x, playerPos.y + (-roomController.roomSize.y / (offset - 1)), playerPos.z);
+                    player.transform.position = new(playerPos.x, playerPos.y + (-roomController.roomSize.y / offset) - 1, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
                     //roomSpawner.GenerateRoom();
                     //doorController.ResetDoors(0);
                     break;
 
                 case 3: //Left door
-                    player.transform.position = new(playerPos.x + (-roomController.roomSize.x / offset), playerPos.y, playerPos.z);
+                    player.transform.position = new(playerPos.x + (-roomController.roomSize.x / offset) - 1, playerPos.y, playerPos.z);
                     roomController.MoveToNewRoom(doorNumber);
                     //roomSpawner.GenerateRoom();
                     //doorController.ResetDoors(1);

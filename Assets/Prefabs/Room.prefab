@@ -501,7 +501,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4027131386538074602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0059, y: -0.0561, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -589,10 +589,10 @@ MonoBehaviour:
   furniture:
   - {fileID: 7687075215584606972, guid: 75e13e1664329ba4a887ae72b9a098ff, type: 3}
   - {fileID: 7589132658278225773, guid: 0ad23b0cd152133479ff4c521d251155, type: 3}
-  - {fileID: 7420289100990999133, guid: 244e0b79520b0fc4e9b7fbd87fff64bb, type: 3}
-  - {fileID: 780061121926873300, guid: b7d0b035f72f5d64a9e52210d607b715, type: 3}
+  - {fileID: 5339727299737286048, guid: f2cb90cfe1a89fa4ebba51245b4d9503, type: 3}
+  - {fileID: 1266964236349973958, guid: 14137c2abaaecc744aed0ca76a54019c, type: 3}
   - {fileID: 6847167757776525834, guid: b5b3b51cd8203c7459e13d52f80168bb, type: 3}
-  - {fileID: 780061121926873300, guid: b7d0b035f72f5d64a9e52210d607b715, type: 3}
+  - {fileID: 3007100753484802777, guid: a22cbd9945294bb498f5a2aa3ffee7fe, type: 3}
   furnitureToPickFrom: []
   furnitureSpawnPointsObject: {fileID: 7580795482275065107}
   furnitureHolder: {fileID: 8105451728971730815}

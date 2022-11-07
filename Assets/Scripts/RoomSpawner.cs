@@ -89,11 +89,7 @@ public class RoomSpawner : MonoBehaviour
 
     private void NewSpawnPickups()
     {
-        //Destroy all leftover pickups
-        for (int i = 0; i < pickupHolder.transform.childCount; i++)
-        { 
-            Destroy(pickupHolder.transform.GetChild(i).gameObject); 
-        }
+        ClearPickups();
 
         for (int i = 0; i < pickupsToSpawn; i++)
         {
@@ -106,6 +102,16 @@ public class RoomSpawner : MonoBehaviour
 
             //Spawn pickup under pickupHolder
             GameObject newPickup = Instantiate(pickup, pickupSpawnVector, Quaternion.identity, pickupHolder.transform);
+        }
+    }
+
+
+    public void ClearPickups()
+    {
+        //Destroy all leftover pickups
+        for (int i = 0; i < pickupHolder.transform.childCount; i++)
+        {
+            Destroy(pickupHolder.transform.GetChild(i).gameObject);
         }
     }
 
@@ -151,6 +157,7 @@ public class RoomSpawner : MonoBehaviour
             furnitureToPickFrom.RemoveAt(furnitureToSpawn);
         }
     }
+
 
     private void ChangeRoomGraphics()
     {
