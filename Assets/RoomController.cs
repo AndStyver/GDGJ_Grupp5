@@ -80,6 +80,7 @@ public class RoomController : MonoBehaviour
         //Remove starting room
         if(startRoom != null)
         {
+            GameObject.Find("UITutorial").SetActive(false);
             Destroy(startRoom, 1 + cameraController.transitionTime);
             startRoom.GetComponent<RoomSpawner>().ClearPickups();
             Debug.Log("Deleted starting room");

@@ -15,12 +15,13 @@ public class DoorPlayerMover : MonoBehaviour
     public RoomSpawner roomSpawner;
     RoomController roomController;
     DoorController doorController;
+    CameraController cameraController;
 
     void Start()
     {
         doorController = GameObject.Find("DoorController").GetComponent<DoorController>();
         player = GameObject.FindGameObjectWithTag("Player");
-
+        cameraController = Camera.main.GetComponent<CameraController>();
         if (roomController == null)
         {
             roomController = GetComponentInParent<RoomController>();
@@ -102,7 +103,7 @@ public class DoorPlayerMover : MonoBehaviour
     void TransitionBetweenRoom(Vector3 startPosition, Vector3 endPosition)
     {
         player.transform.position = Vector3.Lerp(startPosition, endPosition, timer);
-        timer += Time.deltaTime;
+        timer += Time.deltaTime/ cameraController.transitionTime;
 
         if(timer > 1)
         {
