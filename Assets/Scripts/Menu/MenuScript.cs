@@ -51,4 +51,11 @@ public class MenuScript : MonoBehaviour
         Application.Quit();
         Debug.Log("Game Quit");
     }
+
+    public void ButtonBack()
+    {
+        creditsPanel.SetActive(false);
+        tutorialPanel.SetActive(false);
+        storyPanel.SetActive(false);
+    }
 }
