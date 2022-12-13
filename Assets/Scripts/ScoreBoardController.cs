@@ -6,34 +6,48 @@ using TMPro;
 public class ScoreBoardController : MonoBehaviour
 {
     public static ScoreBoardController instance;
+    public GameObject scorePanel;
+    public GameObject gameObjectNames;
+    public GameObject gameObjectScores;
 
-    SortedDictionary<int, string> scoreboard;
+    SortedDictionary<float, string> scoreboard;
     TextMeshProUGUI names;
     TextMeshProUGUI scores;
 
+    public ScoreHolder lastAddedScore;
+
     public void AddNewScore(ScoreHolder score)
     {
+
         score.score  = -score.score; //invert for sorting
-        if (score.score == 0)
+
+        while (scoreboard.ContainsKey(score.score))
         {
-            Debug.Log("Insufficient Score, no score added");
-            return;
+            score.score += 0.0001f;
         }
 
-        if (score.playerName == "")
-        {
-            Debug.Log("No name, no score added");
-            return;
-        }
+        instance.lastAddedScore = score;
+        Debug.Log("Added last score " + lastAddedScore);
+        scoreboard.Add(score.score, score.playerName);
+    }
 
-        if (scoreboard.ContainsKey(score.score))
-            scoreboard[score.score] += ", " + score.playerName;
-        else
-            scoreboard.Add(score.score, score.playerName);
+    public void EditLastScoreName(string name)
+    {
+        if(name == "")
+        {
+            name = "No Name";
+        }
+        scoreboard[lastAddedScore.score] = name;
     }
 
     public void UpdateScore()
     {
+        if(names == null)
+        {
+            names = GameObject.Find("Names").GetComponent<TextMeshProUGUI>();
+            scores = GameObject.Find("Scores").GetComponent<TextMeshProUGUI>();
+        }
+
         if (scoreboard == null)
         {
             Debug.Log("UpdateScore: No scoreboard was found");
@@ -44,23 +58,29 @@ public class ScoreBoardController : MonoBehaviour
 
         names.text = "";
         scores.text = "";
+        int counter = 0;
         foreach ( var score in scoreboard)
         {
-            scores.text += (Mathf.Abs(score.Key) + "\n");
+            counter++;
+            scores.text += (Mathf.Round(Mathf.Abs(score.Key)) + "\n");
             names.text += (score.Value + "\n");
             Debug.Log(names.text);
             Debug.Log(scores.text);
+            if(counter == 5)
+            {
+                break;
+            }
         }
     }
 
     public bool setActive()
     {
-        return transform.GetChild(0).gameObject.activeSelf;
+        return scorePanel.activeSelf;
     }
 
     public void setActive(bool set)
     {
-        transform.GetChild(0).gameObject.SetActive(set);
+        scorePanel.SetActive(set);
     }
 
     //Awake is called every time the Menu Scene is loaded 
@@ -69,9 +89,7 @@ public class ScoreBoardController : MonoBehaviour
         //If we don't have a Scoreboard, make one
         if (instance == null)
         {
-            scoreboard = new SortedDictionary<int, string>();
-            names = GameObject.Find("Names").GetComponent<TextMeshProUGUI>();
-            scores = GameObject.Find("Scores").GetComponent<TextMeshProUGUI>();
+            scoreboard = new SortedDictionary<float, string>();
             DontDestroyOnLoad(gameObject);
             instance = this;
         }

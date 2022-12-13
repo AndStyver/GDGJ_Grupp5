@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     Transform player;
     SpriteRenderer enemyFlip;
     [SerializeField] float MoveSpeed = 20f; //Move speed of ghosts
-    int MaxDist = 10; //Max distance that ghost can aggro onto player
+    //int MaxDist = 10; //Max distance that ghost can aggro onto player
     float MinDist = 0.1f; //Min distance that ghost will get to player 
 
 

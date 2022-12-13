@@ -20,6 +20,8 @@ public class GameOverController : MonoBehaviour
     public Vector3[] enemySpawnPos;
 
     public string playerName;
+    bool hasAddedScore = false;
+    ScoreHolder newScore;
 
 
     private void Start()
@@ -32,7 +34,8 @@ public class GameOverController : MonoBehaviour
     {
         Time.timeScale = 0;
         endPanel.SetActive(true);
-        finalScoreText.text = "Final Score: " + pickups.score;
+        finalScoreText.text = pickups.score.ToString();
+        UpdateScore();
         if (win) { gameOverImage.sprite = gameOverImages[0]; }
         else { gameOverImage.sprite = gameOverImages[1]; }
     }
@@ -64,15 +67,23 @@ public class GameOverController : MonoBehaviour
 
     void UpdateScore()
     {
-        
-        ScoreHolder newScore = new ScoreHolder(playerName, pickups.score);
-        ScoreBoardController.instance.AddNewScore(newScore);
+        if (!hasAddedScore)
+        {
+            newScore = new ScoreHolder("No Name", pickups.score);
+            hasAddedScore = true;
+            ScoreBoardController.instance.AddNewScore(newScore);
+        }
+        else
+        {
+            ScoreBoardController.instance.EditLastScoreName(playerName);
+        }
         ScoreBoardController.instance.UpdateScore();
     }
 
     public void ReadStringInput(string input)
     {
         playerName = input;
+        UpdateScore();
         Debug.Log(playerName);
     }
 }

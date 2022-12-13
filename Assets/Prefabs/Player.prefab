@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  allowInputs: 1
 --- !u!95 &127674804293643709
 Animator:
   serializedVersion: 4
