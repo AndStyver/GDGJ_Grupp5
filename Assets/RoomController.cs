@@ -81,7 +81,7 @@ public class RoomController : MonoBehaviour
         if(startRoom != null)
         {
             GameObject.Find("UITutorial").SetActive(false);
-            Destroy(startRoom, 1 + cameraController.transitionTime);
+            Destroy(startRoom, 0.4f + cameraController.transitionTime);
             startRoom.GetComponent<RoomSpawner>().ClearPickups();
             Debug.Log("Deleted starting room");
         }
@@ -133,7 +133,7 @@ public class RoomController : MonoBehaviour
         if(rooms[doorNumber] != null)
         {
             rooms[doorNumber].GetComponentInChildren<DoorController>().Deactivate();
-            Destroy(rooms[doorNumber], 1 + cameraController.transitionTime);
+            Destroy(rooms[doorNumber], 0.4f + cameraController.transitionTime);
             Debug.Log("Deleted room at door number " + doorNumber);
         }
         else
